@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Car Accessories</title>
+  <link rel="stylesheet" href="./css/global.css" />
+</head>
+
+<body>
+  <h1>Car Accessories</h1>
+
+  <form id="accessoryForm">
+    <label for="accessory">Select an accessory:</label>
+    <select id="accessory" name="accessory">
+      <option value="p123">Car Cover</option>
+      <option value="p234">Seat Covers</option>
+      <option value="p456">Floor Mats</option>
+      <option value="p996">Door Visor</option>
+      <!-- Add more options as needed -->
+    </select>
+    <br />
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" min="1" value="1" />
+    <br />
+
+    <button type="button" onclick="addToProductList()">Add</button>
+  </form>
+
+  <h2>Product List</h2>
+
+  <table id="productList">
+    <tr>
+      <th>Accessory</th>
+      <th>Amount</th>
+      <th>Price</th>
+    </tr>
+  </table>
+
+  <p class="total">Gross Price: $<span id="totalPrice">0</span></p>
+  <p id="vat">VAT:</p>
+  <p id="netPrice">Net Price:</p>
+
+  <script>
+
+    let totalPrice = 0;
+    const VAT_RATE = 0.07;
+
+
+    function addToProductList() {
+      let accessory = document.getElementById("accessory").value;
+      let accessoryName = document.getElementById("accessory").innerText;
+      let amount = document.getElementById("amount").value;
+      let price = calculatePrice(accessory) * amount;
+
+      let table = document.getElementById("productList");
+      let row = table.insertRow(-1);
+      let accessoryCell = row.insertCell(0);
+      let amountCell = row.insertCell(1);
+      let priceCell = row.insertCell(2);
+
+      accessoryCell.innerHTML = accessory;
+      amountCell.innerHTML = amount;
+      priceCell.innerHTML = "$" + price;
+
+      updateTotalPrice(price);
+    }
+
+    function calculatePrice(accessory) {
+      // Add your own logic to calculate the price based on the selected accessory
+      switch (accessory) {
+        case "p123":
+          return 50;
+        case "p234":
+          return 30;
+        case "p456":
+          return 20;
+        case "p996":
+          return 40;
+        // Add more cases as
+        default:
+          return 0;
+      }
+    }
+
+    function calculateVAT(totalPrice) {
+      let vatElement = document.getElementById("vat");
+      let netPriceElement = document.getElementById("netPrice");
+      let vatAmount = (totalPrice * VAT_RATE).toFixed(2);
+      let netPrice = (parseFloat(totalPrice) + parseFloat(vatAmount)).toFixed(2);
+      console.log(vatAmount, netPrice)
+      vatElement.innerHTML = `VAT: ${vatAmount}`;
+      netPriceElement.innerHTML = `Net Price: ${netPrice}`;
+    }
+
+    function updateTotalPrice(price) {
+      let totalPriceElement = document.getElementById("totalPrice");
+      let totalPrice = parseFloat(totalPriceElement.innerHTML);
+      totalPrice += price;
+      totalPriceElement.innerHTML = totalPrice.toFixed(2);
+      calculateVAT(totalPrice);
+    }
+
+  </script>
+</body>
+
+</html>
