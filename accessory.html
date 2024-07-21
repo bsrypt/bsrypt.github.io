@@ -7,6 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -26,7 +27,9 @@
     <input type="number" id="amount" name="amount" min="1" value="1" />
     <br />
 
-    <button type="button" onclick="addToProductList()">Add</button>
+    <button onclick="addToProductList()" class="btn btn-outline-success my-2 my-sm-0" type="button">
+      ADD
+    </button>
   </form>
 
   <h2>Product List</h2>
